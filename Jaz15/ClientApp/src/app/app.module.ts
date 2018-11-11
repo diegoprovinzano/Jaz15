@@ -11,7 +11,8 @@ import { NavComponent } from './nav/nav.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
-import { MesaComponent } from './mesa/mesa.component';
+import { TableComponent } from './table/table.component';
+import { LoungeComponent } from './lounge/lounge.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MesaComponent } from './mesa/mesa.component';
     AboutComponent,
     ContactComponent,
     HomeComponent,
-    MesaComponent
+    TableComponent,
+    LoungeComponent
   ],
   imports: [
     BrowserModule,

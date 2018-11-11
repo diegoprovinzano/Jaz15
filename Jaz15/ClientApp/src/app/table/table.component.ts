@@ -2,11 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 
 @Component({
-  selector: 'app-mesa',
-  templateUrl: './mesa.component.html',
-  styleUrls: ['./mesa.component.css']
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.css']
 })
-export class MesaComponent implements OnInit {
+export class TableComponent implements OnInit {
+
+  id: number;
+  name: string;
+  table: Object;
+  chair: number[];  
 
   tables: Object;
   guests: Object;
