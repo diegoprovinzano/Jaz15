@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaz15", "Jaz15\Jaz15.csproj", "{E4E5610B-7C09-4FDD-AC09-44047D49444E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaz15", "Jaz15\Jaz15.csproj", "{E4E5610B-7C09-4FDD-AC09-44047D49444E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaz15.WebApi", "Jaz15.WebApi\Jaz15.WebApi.csproj", "{A4956715-89F2-4A2A-A3FB-D2CAFF149475}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{E4E5610B-7C09-4FDD-AC09-44047D49444E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4E5610B-7C09-4FDD-AC09-44047D49444E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4E5610B-7C09-4FDD-AC09-44047D49444E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4956715-89F2-4A2A-A3FB-D2CAFF149475}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4956715-89F2-4A2A-A3FB-D2CAFF149475}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4956715-89F2-4A2A-A3FB-D2CAFF149475}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4956715-89F2-4A2A-A3FB-D2CAFF149475}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
