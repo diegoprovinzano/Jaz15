@@ -18,5 +18,8 @@ namespace Jaz15.WebApi
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string NickName { get; set; }
+        public int TableId { get; set; }
+    
+        public virtual Table Table { get; set; }
     }
 }

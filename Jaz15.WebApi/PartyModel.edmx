@@ -4,38 +4,87 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PartyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Guests">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="NickName" Type="nvarchar(max)" />
-          <Property Name="Table" Type="int" />
-          <Property Name="Chair" Type="int" />
-        </EntityType>
-        <EntityType Name="Hosts">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="NickName" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityContainer Name="PartyModelStoreContainer">
-          <EntitySet Name="Guests" EntityType="Self.Guests" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Hosts" EntityType="Self.Hosts" Schema="dbo" store:Type="Tables" />
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="PartyModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="PartyModelStoreContainer">
+    <EntitySet Name="Guests" EntityType="PartyModel.Store.Guests" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Hosts" EntityType="PartyModel.Store.Hosts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tables" EntityType="PartyModel.Store.Tables" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="TableGuest" Association="PartyModel.Store.TableGuest">
+      <End Role="Table" EntitySet="Tables" />
+      <End Role="Guest" EntitySet="Guests" />
+    </AssociationSet>
+    <AssociationSet Name="TableHost" Association="PartyModel.Store.TableHost">
+      <End Role="Table" EntitySet="Tables" />
+      <End Role="Host" EntitySet="Hosts" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Guests">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NickName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Chair" Type="int" Nullable="true" />
+    <Property Name="TableId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Hosts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NickName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TableId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tables">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="TableGuest">
+    <End Role="Table" Type="PartyModel.Store.Tables" Multiplicity="1" />
+    <End Role="Guest" Type="PartyModel.Store.Guests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Guest">
+        <PropertyRef Name="TableId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TableHost">
+    <End Role="Table" Type="PartyModel.Store.Tables" Multiplicity="1" />
+    <End Role="Host" Type="PartyModel.Store.Hosts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Host">
+        <PropertyRef Name="TableId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PartyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="PartyEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="Guests" EntityType="PartyModel.Guest" />
           <EntitySet Name="Hosts" EntityType="PartyModel.Host" />
+          <EntitySet Name="Tables" EntityType="PartyModel.Table" />
+          <AssociationSet Name="TableGuest" Association="PartyModel.TableGuest">
+            <End Role="Table" EntitySet="Tables" />
+            <End Role="Guest" EntitySet="Guests" />
+          </AssociationSet>
+          <AssociationSet Name="TableHost" Association="PartyModel.TableHost">
+            <End Role="Table" EntitySet="Tables" />
+            <End Role="Host" EntitySet="Hosts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Guest">
           <Key>
@@ -45,8 +94,9 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NickName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Table" Type="Int32" />
           <Property Name="Chair" Type="Int32" />
+          <NavigationProperty Name="Table" Relationship="PartyModel.TableGuest" FromRole="Guest" ToRole="Table" />
+          <Property Name="TableId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Host">
           <Key>
@@ -56,36 +106,78 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NickName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Table" Relationship="PartyModel.TableHost" FromRole="Host" ToRole="Table" />
+          <Property Name="TableId" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Guests" Relationship="PartyModel.TableGuest" FromRole="Table" ToRole="Guest" />
+          <NavigationProperty Name="Hosts" Relationship="PartyModel.TableHost" FromRole="Table" ToRole="Host" />
+        </EntityType>
+        <Association Name="TableGuest">
+          <End Type="PartyModel.Table" Role="Table" Multiplicity="1" />
+          <End Type="PartyModel.Guest" Role="Guest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Guest">
+              <PropertyRef Name="TableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TableHost">
+          <End Type="PartyModel.Table" Role="Table" Multiplicity="1" />
+          <End Type="PartyModel.Host" Role="Host" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Host">
+              <PropertyRef Name="TableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="PartyModelStoreContainer" CdmEntityContainer="PartyEntities">
-          <EntitySetMapping Name="Guests">
-            <EntityTypeMapping TypeName="PartyModel.Guest">
-              <MappingFragment StoreEntitySet="Guests">
-                <ScalarProperty Name="Chair" ColumnName="Chair" />
-                <ScalarProperty Name="Table" ColumnName="Table" />
-                <ScalarProperty Name="NickName" ColumnName="NickName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Hosts">
-            <EntityTypeMapping TypeName="PartyModel.Host">
-              <MappingFragment StoreEntitySet="Hosts">
-                <ScalarProperty Name="NickName" ColumnName="NickName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
+    <EntitySetMapping Name="Guests">
+      <EntityTypeMapping TypeName="IsTypeOf(PartyModel.Guest)">
+        <MappingFragment StoreEntitySet="Guests">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="Chair" ColumnName="Chair" />
+          <ScalarProperty Name="TableId" ColumnName="TableId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hosts">
+      <EntityTypeMapping TypeName="IsTypeOf(PartyModel.Host)">
+        <MappingFragment StoreEntitySet="Hosts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="TableId" ColumnName="TableId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tables">
+      <EntityTypeMapping TypeName="IsTypeOf(PartyModel.Table)">
+        <MappingFragment StoreEntitySet="Tables">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
