@@ -9,6 +9,6 @@ export class TableService {
   constructor(private data: DataService) { }
 
   getTables() {
-      this.data.getTables();
-    };
+    this.data.getTables();
+  }
 }

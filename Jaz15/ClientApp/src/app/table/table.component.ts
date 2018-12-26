@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Table } from './table';
-import { TableService } from "./table.service";
+import { TableService } from './table.service';
 
 @Component({
   selector: 'app-table',
@@ -15,8 +15,6 @@ export class TableComponent implements OnInit {
   constructor(private tableService: TableService) { }
 
   ngOnInit() {
-
-
-
+    this.tableService.getTables();
   }
 }
