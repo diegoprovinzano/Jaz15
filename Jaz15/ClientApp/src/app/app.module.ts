@@ -8,21 +8,25 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
 
 import { NavComponent } from './nav/nav.component';
-import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { TableComponent } from './table/table.component';
 import { LoungeComponent } from './lounge/lounge.component';
+import { GuestComponent } from './guest/guest.component';
+import { HostComponent } from './host/host.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    AboutComponent,
     ContactComponent,
+    AboutComponent,
     HomeComponent,
     TableComponent,
-    LoungeComponent
+    LoungeComponent,
+    GuestComponent,
+    HostComponent
   ],
   imports: [
     BrowserModule,

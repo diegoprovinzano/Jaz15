@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Table } from './table';
 import { TableService } from './table.service';
 
@@ -10,11 +10,13 @@ import { TableService } from './table.service';
 
 export class TableComponent implements OnInit {
 
-  tables: Table[];
+  table: Table[];
+
+  @Input('tablename') tablename: number;
 
   constructor(private tableService: TableService) { }
 
   ngOnInit() {
-    this.tableService.getTables();
+    this.tableService.getTable(this.tablename).subscribe(data => this.table = data);
   }
 }

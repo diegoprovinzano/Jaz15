@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service';
+import { Guest } from '../guest/guest';
+import { Host } from '../host/host';
+import { GuestService } from '../guest/guest.service';
+import { HostService } from '../host/host.service';
 
 @Component({
   selector: 'app-home',
@@ -8,23 +11,14 @@ import { DataService } from '../data.service';
 })
 export class HomeComponent implements OnInit {
 
-  guests: Object;
-  host: Object;
+  guests: Guest[];
+  host: Host[];
 
-  constructor(private data: DataService) { }
+  constructor(private guestService: GuestService,
+              private hostService: HostService) { }
 
   ngOnInit() {
-
-    this.data.getGuests().subscribe(data => {
-      this.guests = data;
-      console.log(this.guests);
-    })
-
-    this.data.getHost().subscribe(data => {
-      this.host = data;
-      console.log(this.host);
-    })
+    this.guestService.getGuests().subscribe(data => this.guests = data);
+    this.hostService.getHost(1).subscribe(data => this.host = data);
   }
-
-
 }

@@ -1,17 +1,17 @@
 <table border="1">
   <tr>
-    <td>{{guests[0].FirstName + ', ' + guests[0].LastName}}</td>
-    <td>{{guests[1].FirstName + ', ' + guests[1].LastName}}</td>
-    <td>{{guests[2].FirstName + ', ' + guests[2].LastName}}</td>
+    <td>{{table.Id == 1 ? table?.Hosts[0]?.NickName: table?.Guests[0]?.NickName}}</td>
+    <td>{{table?.Guests[1]?.NickName}}</td>
+    <td>{{table?.Guests[2]?.NickName}}</td>
   </tr>
   <tr>
-    <td>{{guests[3].FirstName + ', ' + guests[3].LastName}}</td>
-    <td>{{'Mesa ' + guests[0].Table}}</td>
-    <td>{{guests[4].FirstName + ', ' + guests[4].LastName}}</td>
+    <td>{{table?.Guests[3]?.NickName}}</td>
+    <td>{{'Mesa ' + table?.Id}}</td>
+    <td>{{table?.Guests[4]?.NickName}}</td>
   </tr>
   <tr>
-    <td>{{guests[5].FirstName + ', ' + guests[5].LastName}}</td>
-    <td>{{guests[6].FirstName + ', ' + guests[6].LastName}}</td>
-    <td>{{guests[7].FirstName + ', ' + guests[7].LastName}}</td>
+    <td>{{table?.Guests[5]?.NickName}}</td>
+    <td>{{table?.Guests[6]?.NickName}}</td>
+    <td>{{table?.Guests[7]?.NickName}}</td>
   </tr>
 </table>

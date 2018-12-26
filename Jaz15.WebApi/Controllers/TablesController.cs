@@ -8,11 +8,13 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using Jaz15.WebApi;
 
 namespace Jaz15.WebApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TablesController : ApiController
     {
         private PartyEntities db = new PartyEntities();

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TableComponent } from '../table/table.component';
+import { Table } from '../table/table';
+import { Guest } from '../guest/guest';
+import { Host } from '../host/host';
 
 @Component({
   selector: 'app-lounge',
@@ -7,6 +9,10 @@ import { TableComponent } from '../table/table.component';
   styleUrls: ['./lounge.component.css']
 })
 export class LoungeComponent implements OnInit {
+
+  host: Host;
+  tables: Table[];
+  guests: Guest[];
 
   constructor() { }
 

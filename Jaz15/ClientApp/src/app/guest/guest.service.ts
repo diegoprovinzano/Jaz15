@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Table } from './table';
+import { Guest } from './guest';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,16 +12,16 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class TableService {
+export class GuestService {
   url = 'http://localhost:42000/api/';
 
   constructor(private http: HttpClient) { }
 
-  getTable(id: number): Observable<Table[]> {
-    return this.http.get<Table[]>(this.url + 'tables/' + id);
+  getGuest(id: number): Observable<Guest[]> {
+    return this.http.get<Guest[]>(this.url + 'guests/' + id);
   }
 
-  getTables(): Observable<Table[]> {
-    return this.http.get<Table[]>(this.url + 'tables');
+  getGuests(): Observable<Guest[]> {
+    return this.http.get<Guest[]>(this.url + 'guests');
   }
 }

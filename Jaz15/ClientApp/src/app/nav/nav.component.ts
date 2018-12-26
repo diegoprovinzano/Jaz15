@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service';
+import { HostService } from '../host/host.service';
+import { Host } from '../host/host';
 
 @Component({
   selector: 'app-nav',
@@ -9,15 +10,14 @@ import { DataService } from '../data.service';
 
 export class NavComponent implements OnInit {
 
-  appTitle: Object;
+  appTitle: Host[];
 
-  constructor(private data: DataService) { }
+  constructor(private hostService: HostService) { }
 
-  ngOnInit() {    
-    this.data.getHost().subscribe(data => {
-      this.appTitle = data;      
-      console.log(this.appTitle);
-    })
+  ngOnInit() {
+    this.hostService.getHost(1).subscribe(data => {
+      this.appTitle = data;
+    });
   }
 
 }
