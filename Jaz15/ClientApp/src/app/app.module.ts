@@ -15,6 +15,7 @@ import { TableComponent } from './table/table.component';
 import { LoungeComponent } from './lounge/lounge.component';
 import { GuestComponent } from './guest/guest.component';
 import { HostComponent } from './host/host.component';
+import * as $ from 'jquery';
 
 @NgModule({
   declarations: [

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery';
+import { get } from 'scriptjs';
+
 
 @Component({
   selector: 'app-about',
@@ -10,6 +13,11 @@ export class AboutComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    get('./app/about/js/instafeed.min.js', () => {
+      get('./app/about/js/custom.js', () => {
+
+      });
+    });
   }
 
 }
