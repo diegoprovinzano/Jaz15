@@ -13,8 +13,8 @@ export class AboutComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    get('./app/about/js/instafeed.min.js', () => {
-      get('./app/about/js/custom.js', () => {
+    get('./js/instafeed.min.js', () => {
+      get('./js/custom.js', () => {
 
       });
     });

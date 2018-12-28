@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Guest } from './guest';
+import { AppGlobal } from '../app.global';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,15 +14,15 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class GuestService {
-  url = 'http://localhost:42000/api/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private appGlobal: AppGlobal,
+              private http: HttpClient) { }
 
   getGuest(id: number): Observable<Guest[]> {
-    return this.http.get<Guest[]>(this.url + 'guests/' + id);
+    return this.http.get<Guest[]>(this.appGlobal.baseApiUrl + 'guests/' + id);
   }
 
   getGuests(): Observable<Guest[]> {
-    return this.http.get<Guest[]>(this.url + 'guests');
+    return this.http.get<Guest[]>(this.appGlobal.baseApiUrl + 'guests');
   }
 }

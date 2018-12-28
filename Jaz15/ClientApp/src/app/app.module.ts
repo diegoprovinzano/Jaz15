@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material';
+import { AngularMaterialModule } from './angular-material/angular-material.module';
 
 import { NavComponent } from './nav/nav.component';
 import { ContactComponent } from './contact/contact.component';
@@ -16,6 +16,8 @@ import { LoungeComponent } from './lounge/lounge.component';
 import { GuestComponent } from './guest/guest.component';
 import { HostComponent } from './host/host.component';
 import * as $ from 'jquery';
+import { AppGlobal } from './app.global';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,10 +35,12 @@ import * as $ from 'jquery';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    AngularMaterialModule,
     HttpClientModule,
-    MaterialModule
+    ReactiveFormsModule
   ],
-  providers: [],
+  entryComponents: [GuestComponent],
+  providers: [AppGlobal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

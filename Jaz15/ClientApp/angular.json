@@ -21,8 +21,9 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/app/about/js/instafeed.min.js",
-              "src/app/about/js/custom.js"
+              "src/web.config",
+              "src/js/instafeed.min.js",
+              "src/js/custom.js"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
@@ -30,8 +31,8 @@
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
-              "src/app/about/js/instafeed.min.js",
-              "src/app/about/js/custom.js"
+              "src/js/instafeed.min.js",
+              "src/js/custom.js"
             ]
           },
           "configurations": {
@@ -91,14 +92,15 @@
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
-              "src/app/about/js/instafeed.min.js",
-              "src/app/about/js/custom.js"
+              "src/js/instafeed.min.js",
+              "src/js/custom.js"
             ],
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/app/about/js/instafeed.min.js",
-              "src/app/about/js/custom.js"
+              "src/web.config",
+              "src/js/instafeed.min.js",
+              "src/js/custom.js"
             ]
           }
         },

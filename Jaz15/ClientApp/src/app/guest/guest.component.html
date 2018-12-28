@@ -1,3 +1,20 @@
-<p>
-  guest works!
-</p>
+
+<h2>Invitado {{id}}</h2>
+<div class="">
+  <form [formGroup]="guestForm" (ngSubmit)="onSubmit()" class="">
+    
+    <mat-label>Nombre:</mat-label>
+    <input matInput formControlName="FirstName" >
+  
+    <mat-label>Apellido:</mat-label>
+    <input matInput formControlName="LastName" >
+
+    <mat-label>NickName:</mat-label>
+    <input matInput formControlName="NickName" >
+  
+    <mat-slide-toggle formControlName="RSVP">VOY!</mat-slide-toggle>
+
+    <button mat-button type="submit">Submit</button>
+
+  </form>
+</div>
