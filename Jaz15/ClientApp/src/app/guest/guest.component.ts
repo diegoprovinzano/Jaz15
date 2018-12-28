@@ -12,10 +12,13 @@ import { Guest } from './guest';
 export class GuestComponent implements OnInit {
 
   guestForm = new FormGroup({
+    Id: new FormControl(''),
     FirstName: new FormControl(''),
     LastName: new FormControl(''),
     NickName: new FormControl(''),
-    RSVP: new FormControl('')
+    Instagram: new FormControl(''),
+    RSVP: new FormControl(''),
+    TableId: new FormControl('')
   });
 
   guest: Guest[];
@@ -31,8 +34,22 @@ export class GuestComponent implements OnInit {
       this.id = +params['id']; // (+) converts string 'id' to a number
 
       // In a real app: dispatch action to load the details here.
-      this.guestService.getGuest(this.id).subscribe(data => this.guest = data);
+      this.guestService.getGuest(this.id).subscribe(data => {
+        this.guest = data;
+        this.guestForm.get('Id').setValue(data['Id']);
+        this.guestForm.get('FirstName').setValue(data['FirstName']);
+        this.guestForm.get('LastName').setValue(data['LastName']);
+        this.guestForm.get('NickName').setValue(data['NickName']);
+        this.guestForm.get('Instagram').setValue(data['Instagram']);
+        this.guestForm.get('RSVP').setValue(data['RSVP']);
+        this.guestForm.get('TableId').setValue(data['TableId']);
+      });
+
    });
+  }
+
+  onSubmit() {
+    this.guestService.putGuest(this.guestForm.value).subscribe(result => this.guest);
   }
 
 }

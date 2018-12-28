@@ -1,0 +1,24 @@
+.guestForm-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.guestForm-container > * {
+    width: 100%;
+}
+
+.guestForm-container form {
+    margin-bottom: 20px;
+}
+
+.guestForm-container form > * {
+    margin: 5px 0;
+}
+
+.guestForm-container .mat-radio-button {
+    margin: 0 5px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    padding-right: 16px;
+}

@@ -1,20 +1,38 @@
-
-<h2>Invitado {{id}}</h2>
-<div class="">
-  <form [formGroup]="guestForm" (ngSubmit)="onSubmit()" class="">
+<div class="guestForm-container">
+<h2 mat-dialog-title>Invitado</h2>
+  <form class="guestForm-container" [formGroup]="guestForm" (ngSubmit)="onSubmit()">
+    <div>
+      <mat-form-field>
+        <mat-label>Nombre:</mat-label>
+        <input matInput formControlName="FirstName">
+    </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Apellido:</mat-label>
+        <input matInput formControlName="LastName">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>NickName</mat-label>
+        <input matInput formControlName="NickName" placeholder="Ingresa tu sobrenombre">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Instagram</mat-label>
+        <input matInput formControlName="Instagram" placeholder="@jaz_provinzano">
+      </mat-form-field>
+    </div>
+    <mat-slide-toggle #toggle [checked]="checked" formControlName="RSVP">
+      {{ !toggle.checked ? 'NO puedo' : 'SI, voy a la fiesta!' }}
+      <mat-icon matSuffix>{{ !toggle.checked ? 'sentiment_very_dissatisfied' : 'sentiment_very_satisfied' }} </mat-icon>
+    </mat-slide-toggle>
     
-    <mat-label>Nombre:</mat-label>
-    <input matInput formControlName="FirstName" >
-  
-    <mat-label>Apellido:</mat-label>
-    <input matInput formControlName="LastName" >
-
-    <mat-label>NickName:</mat-label>
-    <input matInput formControlName="NickName" >
-  
-    <mat-slide-toggle formControlName="RSVP">VOY!</mat-slide-toggle>
-
-    <button mat-button type="submit">Submit</button>
-
+    <input hidden matInput formControlName="Id">
+    <input hidden matInput formControlName="TableId">
+    <br/>
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
   </form>
 </div>

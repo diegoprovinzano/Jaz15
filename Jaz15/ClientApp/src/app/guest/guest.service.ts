@@ -6,7 +6,7 @@ import { AppGlobal } from '../app.global';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'content-type': 'application/json'
+    'Content-Type': 'application/json'
   })
 };
 
@@ -24,5 +24,13 @@ export class GuestService {
 
   getGuests(): Observable<Guest[]> {
     return this.http.get<Guest[]>(this.appGlobal.baseApiUrl + 'guests');
+  }
+
+  putGuest(guest: Guest): Observable<Guest> {
+    return this.http.put<Guest>(this.appGlobal.baseApiUrl + 'guests/' + guest.Id, guest, httpOptions);
+  }
+
+  postGuest(guest: Guest): Observable<Guest> {
+    return this.http.put<Guest>(this.appGlobal.baseApiUrl + 'guests', guest, httpOptions);
   }
 }

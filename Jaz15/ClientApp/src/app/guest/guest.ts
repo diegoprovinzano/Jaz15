@@ -5,4 +5,6 @@ export class Guest {
     NickName: string;
     RSVP: boolean;
     Chair: number;
+    Instagram: string;
+    TableId: number;
 }

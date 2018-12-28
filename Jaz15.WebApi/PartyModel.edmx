@@ -13,6 +13,7 @@
           <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="NickName" Type="nvarchar(max)" />
+          <Property Name="Instagram" Type="nvarchar(max)" />
           <Property Name="RSVP" Type="bit" />
           <Property Name="Chair" Type="int" />
           <Property Name="TableId" Type="int" Nullable="false" />
@@ -95,6 +96,7 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NickName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Instagram" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RSVP" Type="Boolean" />
           <Property Name="Chair" Type="Int32" />
           <NavigationProperty Name="Table" Relationship="PartyModel.TableGuest" FromRole="Guest" ToRole="Table" />
@@ -152,7 +154,8 @@
     <EntitySetMapping Name="Guests">
       <EntityTypeMapping TypeName="IsTypeOf(PartyModel.Guest)">
         <MappingFragment StoreEntitySet="Guests">
-          <ScalarProperty Name="RSVP" ColumnName="RSVP" />
+          <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+                <ScalarProperty Name="RSVP" ColumnName="RSVP" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
