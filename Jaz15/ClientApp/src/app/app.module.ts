@@ -18,6 +18,7 @@ import { HostComponent } from './host/host.component';
 import * as $ from 'jquery';
 import { AppGlobal } from './app.global';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    FlexLayoutModule,
     HttpClientModule,
     ReactiveFormsModule
   ],

@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6d8ca70bad37426abb0afe405a205124" Name="Diagram1" >
-        <EntityTypeShape EntityType="PartyModel.Guest" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="PartyModel.Host" Width="1.5" PointX="5" PointY="0.75" />
         <EntityTypeShape EntityType="PartyModel.Table" Width="1.5" PointX="2.875" PointY="0.75" />
-        <AssociationConnector Association="PartyModel.TableGuest" />
         <AssociationConnector Association="PartyModel.TableHost" />
+        <EntityTypeShape EntityType="PartyModel.Guest" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="PartyModel.FK_TableGuest" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

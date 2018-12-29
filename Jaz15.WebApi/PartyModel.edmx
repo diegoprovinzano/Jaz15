@@ -7,9 +7,10 @@
     <Schema Namespace="PartyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Guests">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="UID" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="NickName" Type="nvarchar(max)" />
@@ -76,32 +77,18 @@
     <edmx:ConceptualModels>
       <Schema Namespace="PartyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="PartyEntities" annotation:LazyLoadingEnabled="true" >
-          <EntitySet Name="Guests" EntityType="PartyModel.Guest" />
           <EntitySet Name="Hosts" EntityType="PartyModel.Host" />
           <EntitySet Name="Tables" EntityType="PartyModel.Table" />
-          <AssociationSet Name="TableGuest" Association="PartyModel.TableGuest">
-            <End Role="Table" EntitySet="Tables" />
-            <End Role="Guest" EntitySet="Guests" />
-          </AssociationSet>
           <AssociationSet Name="TableHost" Association="PartyModel.TableHost">
             <End Role="Table" EntitySet="Tables" />
             <End Role="Host" EntitySet="Hosts" />
           </AssociationSet>
+          <EntitySet Name="Guests" EntityType="PartyModel.Guest" />
+          <AssociationSet Name="FK_TableGuest" Association="PartyModel.FK_TableGuest">
+            <End Role="Table" EntitySet="Tables" />
+            <End Role="Guest" EntitySet="Guests" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Guest">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NickName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Instagram" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="RSVP" Type="Boolean" />
-          <Property Name="Chair" Type="Int32" />
-          <NavigationProperty Name="Table" Relationship="PartyModel.TableGuest" FromRole="Guest" ToRole="Table" />
-          <Property Name="TableId" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="Host">
           <Key>
             <PropertyRef Name="Id" />
@@ -118,21 +105,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Guests" Relationship="PartyModel.TableGuest" FromRole="Table" ToRole="Guest" />
           <NavigationProperty Name="Hosts" Relationship="PartyModel.TableHost" FromRole="Table" ToRole="Host" />
+          <NavigationProperty Name="Guests" Relationship="PartyModel.FK_TableGuest" FromRole="Table" ToRole="Guest" />
         </EntityType>
-        <Association Name="TableGuest">
-          <End Type="PartyModel.Table" Role="Table" Multiplicity="1" />
-          <End Type="PartyModel.Guest" Role="Guest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Table">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Guest">
-              <PropertyRef Name="TableId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="TableHost">
           <End Type="PartyModel.Table" Role="Table" Multiplicity="1" />
           <End Type="PartyModel.Host" Role="Host" Multiplicity="*" />
@@ -145,26 +120,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Guest">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NickName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Instagram" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RSVP" Type="Boolean" />
+          <Property Name="Chair" Type="Int32" />
+          <Property Name="TableId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Table" Relationship="PartyModel.FK_TableGuest" FromRole="Guest" ToRole="Table" />
+        </EntityType>
+        <Association Name="FK_TableGuest">
+          <End Type="PartyModel.Table" Role="Table" Multiplicity="1" />
+          <End Type="PartyModel.Guest" Role="Guest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Guest">
+              <PropertyRef Name="TableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="PartyModelStoreContainer" CdmEntityContainer="PartyEntities">
-    <EntitySetMapping Name="Guests">
-      <EntityTypeMapping TypeName="IsTypeOf(PartyModel.Guest)">
-        <MappingFragment StoreEntitySet="Guests">
-          <ScalarProperty Name="Instagram" ColumnName="Instagram" />
-                <ScalarProperty Name="RSVP" ColumnName="RSVP" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="NickName" ColumnName="NickName" />
-          <ScalarProperty Name="Chair" ColumnName="Chair" />
-          <ScalarProperty Name="TableId" ColumnName="TableId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Hosts">
       <EntityTypeMapping TypeName="IsTypeOf(PartyModel.Host)">
         <MappingFragment StoreEntitySet="Hosts">
@@ -183,6 +171,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <EntitySetMapping Name="Guests">
+            <EntityTypeMapping TypeName="PartyModel.Guest">
+              <MappingFragment StoreEntitySet="Guests">
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="Chair" ColumnName="Chair" />
+                <ScalarProperty Name="RSVP" ColumnName="RSVP" />
+                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

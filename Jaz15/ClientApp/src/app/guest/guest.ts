@@ -1,5 +1,6 @@
 export class Guest {
     Id: number;
+    UID: string;
     FirstName: string;
     LastName: string;
     NickName: string;

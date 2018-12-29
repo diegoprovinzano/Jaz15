@@ -1,5 +1,5 @@
 <div class="guestForm-container">
-<h2 mat-dialog-title>Invitado</h2>
+<h2>Invitado</h2>
   <form class="guestForm-container" [formGroup]="guestForm" (ngSubmit)="onSubmit()">
     <div>
       <mat-form-field>
@@ -31,6 +31,7 @@
     </mat-slide-toggle>
     
     <input hidden matInput formControlName="Id">
+    <input hidden matInput formControlName="UID">
     <input hidden matInput formControlName="TableId">
     <br/>
     <button mat-raised-button color="primary" type="submit">Guardar</button>

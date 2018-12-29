@@ -31,7 +31,7 @@ namespace Jaz15.WebApi.Controllers
         [ResponseType(typeof(Guest))]
         public async Task<IHttpActionResult> GetGuest(int id)
         {
-            Guest guest = await db.Guests.FindAsync(id);
+            Guest guest = await db.Guests.Where(x => x.Id == id).FirstAsync();
             if (guest == null)
             {
                 return NotFound();
@@ -40,31 +40,33 @@ namespace Jaz15.WebApi.Controllers
             return Ok(guest);
         }
 
-        //// GET: api/Guests/5
-        //[HttpGet]
-        //[ResponseType(typeof(Guest))]
-        //public async Task<IHttpActionResult> GetGuestByName(string name)
-        //{
-        //    Guest guest = await db.Guests.FindAsync(name);
-        //    if (guest == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: api/Guests/5
+        [HttpGet]
+        [Route("api/GuestsUID/{uid}")]
+        [ResponseType(typeof(Guest))]
+        public async Task<IHttpActionResult> GetGuestByUID(System.Guid uid)
+        {
+            Guest guest = await db.Guests.FindAsync(uid);
+            if (guest == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(guest);
-        //}
+            return Ok(guest);
+        }
 
         // PUT: api/Guests/5
         [HttpPut]
+        [Route("api/Guests/{uid}")]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutGuest(int id, Guest guest)
+        public async Task<IHttpActionResult> PutGuest(System.Guid uid, Guest guest)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != guest.Id)
+            if (uid != guest.UID)
             {
                 return BadRequest();
             }
@@ -77,7 +79,7 @@ namespace Jaz15.WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GuestExists(id))
+                if (!GuestExists(uid))
                 {
                     return NotFound();
                 }
@@ -131,9 +133,9 @@ namespace Jaz15.WebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool GuestExists(int id)
+        private bool GuestExists(System.Guid uid)
         {
-            return db.Guests.Count(e => e.Id == id) > 0;
+            return db.Guests.Count(e => e.UID == uid) > 0;
         }
     }
 }

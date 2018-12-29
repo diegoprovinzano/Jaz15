@@ -13,6 +13,7 @@ export class GuestComponent implements OnInit {
 
   guestForm = new FormGroup({
     Id: new FormControl(''),
+    UID: new FormControl(''),
     FirstName: new FormControl(''),
     LastName: new FormControl(''),
     NickName: new FormControl(''),
@@ -22,7 +23,7 @@ export class GuestComponent implements OnInit {
   });
 
   guest: Guest[];
-  id: number;
+  uid: string;
   private sub: any;
 
   constructor(private route: ActivatedRoute,
@@ -31,12 +32,13 @@ export class GuestComponent implements OnInit {
   ngOnInit() {
 
     this.sub = this.route.params.subscribe(params => {
-      this.id = +params['id']; // (+) converts string 'id' to a number
+      this.uid = params['id']; // (+) converts string 'id' to a number
 
       // In a real app: dispatch action to load the details here.
-      this.guestService.getGuest(this.id).subscribe(data => {
+      this.guestService.getGuestUID(this.uid).subscribe(data => {
         this.guest = data;
         this.guestForm.get('Id').setValue(data['Id']);
+        this.guestForm.get('UID').setValue(data['UID']);
         this.guestForm.get('FirstName').setValue(data['FirstName']);
         this.guestForm.get('LastName').setValue(data['LastName']);
         this.guestForm.get('NickName').setValue(data['NickName']);

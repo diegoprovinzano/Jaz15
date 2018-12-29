@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Jaz15.WebApi
 {
@@ -9,7 +10,7 @@ namespace Jaz15.WebApi
     {
         public static void Register(HttpConfiguration config)
         {
-            config.EnableCors();
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
 
             // Web API configuration and services
 
@@ -23,6 +24,7 @@ namespace Jaz15.WebApi
             );
 
             config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            //GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
         }
     }
 }

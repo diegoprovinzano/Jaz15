@@ -25,8 +25,8 @@ namespace Jaz15.WebApi
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Guest> Guests { get; set; }
         public virtual DbSet<Host> Hosts { get; set; }
         public virtual DbSet<Table> Tables { get; set; }
+        public virtual DbSet<Guest> Guests { get; set; }
     }
 }

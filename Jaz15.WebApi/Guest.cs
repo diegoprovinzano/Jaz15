@@ -15,6 +15,7 @@ namespace Jaz15.WebApi
     public partial class Guest
     {
         public int Id { get; set; }
+        public System.Guid UID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string NickName { get; set; }
