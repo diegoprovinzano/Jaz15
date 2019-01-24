@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,6 +14,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using Jaz15.WebApi;
+using QRCoder;
 
 namespace Jaz15.WebApi.Controllers
 {
@@ -122,6 +126,32 @@ namespace Jaz15.WebApi.Controllers
             await db.SaveChangesAsync();
 
             return Ok(guest);
+        }
+
+        // GET: api/Guests/5
+        [HttpGet]
+        [Route("api/GuestsQR/{uid}")]
+        public async Task<IHttpActionResult> GetGuestQRByUID(System.Guid uid)
+        {
+            Guest guest = await db.Guests.FindAsync(uid);
+            if (guest == null)
+            {
+                return null;
+            }
+
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode("http://localhost:4200/guest/" + uid, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+
+            Bitmap bImage = qrCodeImage;
+            System.IO.MemoryStream ms = new MemoryStream();
+            bImage.Save(ms, ImageFormat.Jpeg);
+            byte[] byteImage = ms.ToArray();
+            var SigBase64 = Convert.ToBase64String(byteImage);
+
+            return Ok(SigBase64);
+            // return Ok(qrCodeImage.ToString());
         }
 
         protected override void Dispose(bool disposing)

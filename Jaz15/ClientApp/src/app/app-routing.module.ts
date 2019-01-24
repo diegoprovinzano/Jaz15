@@ -5,13 +5,15 @@ import { AboutComponent } from './about/about.component';
 import { LoungeComponent } from './lounge/lounge.component';
 import { HostComponent } from './host/host.component';
 import { GuestComponent } from './guest/guest.component';
+import { QrComponent } from './qr/qr.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'lounge', component: LoungeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'host', component: HostComponent },
-  { path: 'guest/:id', component: GuestComponent }
+  { path: 'guest/:id', component: GuestComponent },
+  { path: 'qr', component: QrComponent }
 ];
 
 @NgModule({

@@ -19,6 +19,7 @@ import * as $ from 'jquery';
 import { AppGlobal } from './app.global';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { QrComponent } from './qr/qr.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     TableComponent,
     LoungeComponent,
     GuestComponent,
-    HostComponent
+    HostComponent,
+    QrComponent
   ],
   imports: [
     BrowserModule,

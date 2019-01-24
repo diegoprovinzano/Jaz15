@@ -1,6 +1,6 @@
 <table border="1">
   <tr>
-    <td>{{table.Id == 1 ? table?.Hosts[0]?.NickName: table?.Guests[0]?.NickName}}</td>
+    <td>{{table?.Id == 1 ? table?.Hosts[0]?.NickName: table?.Guests[0]?.NickName}}</td>
     <td>{{table?.Guests[1]?.NickName}}</td>
     <td>{{table?.Guests[2]?.NickName}}</td>
   </tr>
