@@ -1,8 +1,7 @@
 <p>
+
   <button type="button" (click)="getImageFromService()">Get Image</button>
   
-
-  <img id="image" [src]="imageToShow"
-      alt="Place image title"
-      *ngIf="!isImageLoading; else noImageFound">
+  Image:
+  <img id="image" [src]="imageToShow || ''" style="width: 50%; height: 50%;">
 </p>

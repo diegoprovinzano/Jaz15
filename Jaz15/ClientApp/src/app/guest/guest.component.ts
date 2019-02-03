@@ -3,6 +3,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { GuestService } from './guest.service';
 import { Guest } from './guest';
+import { QrService } from '../qr/qr.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-guest',
@@ -24,10 +26,13 @@ export class GuestComponent implements OnInit {
 
   guest: Guest[];
   uid: string;
+  imageToShow: any;
   private sub: any;
 
   constructor(private route: ActivatedRoute,
-              private guestService: GuestService) { }
+              private guestService: GuestService,
+              private qrService: QrService,
+              private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
 
@@ -46,8 +51,15 @@ export class GuestComponent implements OnInit {
         this.guestForm.get('RSVP').setValue(data['RSVP']);
         this.guestForm.get('TableId').setValue(data['TableId']);
       });
+    });
 
-   });
+    this.getImageFromService(this.uid);
+  }
+
+  getImageFromService(uid: string) {
+    this.qrService.getImage(uid).subscribe(data => {
+      this.imageToShow = this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' + data);
+    });
   }
 
   onSubmit() {

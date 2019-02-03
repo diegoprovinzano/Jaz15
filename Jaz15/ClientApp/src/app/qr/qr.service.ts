@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppGlobal } from '../app.global';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class QrService {
   constructor(private appGlobal: AppGlobal,
               private http: HttpClient) { }
 
-  getImage(uid: string): Observable<Blob> {
-    return this.http.get(this.appGlobal.baseApiUrl + 'guestsqr/' + uid, { responseType: 'blob' });
+  getImage(uid: string): Observable<any> {
+    return this.http.get(this.appGlobal.baseApiUrl + 'guestsqr/' + uid);
   }
 }

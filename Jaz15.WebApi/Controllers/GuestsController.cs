@@ -142,7 +142,7 @@ namespace Jaz15.WebApi.Controllers
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode("http://localhost:4200/guest/" + uid, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
-            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            Bitmap qrCodeImage = qrCode.GetGraphic(20, Color.Black, Color.White, (Bitmap)Bitmap.FromFile(@"C:\Users\diego\source\repos\Jaz15\Jaz15\ClientApp\src\assets\jaz15.png"));
 
             Bitmap bImage = qrCodeImage;
             System.IO.MemoryStream ms = new MemoryStream();
