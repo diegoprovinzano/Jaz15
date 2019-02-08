@@ -19,6 +19,7 @@ export class GuestComponent implements OnInit {
     FirstName: new FormControl(''),
     LastName: new FormControl(''),
     NickName: new FormControl(''),
+    Tel: new FormControl(''),
     Instagram: new FormControl(''),
     RSVP: new FormControl(''),
     TableId: new FormControl('')
@@ -47,6 +48,7 @@ export class GuestComponent implements OnInit {
         this.guestForm.get('FirstName').setValue(data['FirstName']);
         this.guestForm.get('LastName').setValue(data['LastName']);
         this.guestForm.get('NickName').setValue(data['NickName']);
+        this.guestForm.get('Tel').setValue(data['Tel']);
         this.guestForm.get('Instagram').setValue(data['Instagram']);
         this.guestForm.get('RSVP').setValue(data['RSVP']);
         this.guestForm.get('TableId').setValue(data['TableId']);

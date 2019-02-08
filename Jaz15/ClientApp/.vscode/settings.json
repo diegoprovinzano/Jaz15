@@ -1,3 +1,5 @@
 {
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "appService.defaultWebAppToDeploy": "/subscriptions/e3697c1c-9273-443e-87ad-2a25a089979e/resourceGroups/jaz15/providers/Microsoft.Web/sites/jaz15",
+    "appService.deploySubpath": "dist\\ClientApp"
 }

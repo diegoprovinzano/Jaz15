@@ -14,6 +14,7 @@
           <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="NickName" Type="nvarchar(max)" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="20" />
           <Property Name="Instagram" Type="nvarchar(max)" />
           <Property Name="RSVP" Type="bit" />
           <Property Name="Chair" Type="int" />
@@ -34,6 +35,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_TableGuest">
           <End Role="Tables" Type="Self.Tables" Multiplicity="1" />
@@ -107,6 +109,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Hosts" Relationship="PartyModel.TableHost" FromRole="Table" ToRole="Host" />
           <NavigationProperty Name="Guests" Relationship="PartyModel.FK_TableGuest" FromRole="Table" ToRole="Guest" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="TableHost">
           <End Type="PartyModel.Table" Role="Table" Multiplicity="1" />
@@ -129,6 +132,7 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NickName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Instagram" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RSVP" Type="Boolean" />
           <Property Name="Chair" Type="Int32" />
@@ -167,25 +171,27 @@
     <EntitySetMapping Name="Tables">
       <EntityTypeMapping TypeName="IsTypeOf(PartyModel.Table)">
         <MappingFragment StoreEntitySet="Tables">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-          <EntitySetMapping Name="Guests">
-            <EntityTypeMapping TypeName="PartyModel.Guest">
-              <MappingFragment StoreEntitySet="Guests">
-                <ScalarProperty Name="TableId" ColumnName="TableId" />
-                <ScalarProperty Name="Chair" ColumnName="Chair" />
-                <ScalarProperty Name="RSVP" ColumnName="RSVP" />
-                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
-                <ScalarProperty Name="NickName" ColumnName="NickName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UID" ColumnName="UID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+    <EntitySetMapping Name="Guests">
+      <EntityTypeMapping TypeName="IsTypeOf(PartyModel.Guest)">
+        <MappingFragment StoreEntitySet="Guests">
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+          <ScalarProperty Name="RSVP" ColumnName="RSVP" />
+          <ScalarProperty Name="Chair" ColumnName="Chair" />
+          <ScalarProperty Name="TableId" ColumnName="TableId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

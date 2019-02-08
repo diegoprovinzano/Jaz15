@@ -22,6 +22,7 @@ namespace Jaz15.WebApi
         }
     
         public int Id { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Host> Hosts { get; set; }

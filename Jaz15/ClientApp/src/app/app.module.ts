@@ -20,6 +20,8 @@ import { AppGlobal } from './app.global';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QrComponent } from './qr/qr.component';
+import { FoodComponent } from './food/food.component';
+import { GiftComponent } from './gift/gift.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { QrComponent } from './qr/qr.component';
     LoungeComponent,
     GuestComponent,
     HostComponent,
-    QrComponent
+    QrComponent,
+    FoodComponent,
+    GiftComponent
   ],
   imports: [
     BrowserModule,

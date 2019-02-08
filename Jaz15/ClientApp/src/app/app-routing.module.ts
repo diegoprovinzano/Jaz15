@@ -6,9 +6,15 @@ import { LoungeComponent } from './lounge/lounge.component';
 import { HostComponent } from './host/host.component';
 import { GuestComponent } from './guest/guest.component';
 import { QrComponent } from './qr/qr.component';
+import { FoodComponent } from './food/food.component';
+import { ContactComponent } from './contact/contact.component';
+import { GiftComponent } from './gift/gift.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'food', component: FoodComponent },
+  { path: 'gift', component: GiftComponent },
+  { path: 'contact', component: ContactComponent },
   { path: 'lounge', component: LoungeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'host', component: HostComponent },

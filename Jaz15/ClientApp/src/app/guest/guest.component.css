@@ -5,10 +5,12 @@
 
 .guestForm-container > * {
     width: 100%;
+    margin-left: 20px;
 }
 
 .guestForm-container form {
     margin-bottom: 20px;
+    margin-left: 20px;
 }
 
 .guestForm-container form > * {
