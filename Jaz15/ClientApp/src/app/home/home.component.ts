@@ -12,7 +12,7 @@ import { HostService } from '../host/host.service';
 export class HomeComponent implements OnInit {
 
   guests: Guest[];
-  host: Host[];
+  host: Host;
 
   constructor(private guestService: GuestService,
               private hostService: HostService) { }

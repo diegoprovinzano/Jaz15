@@ -10,7 +10,7 @@ import { Host } from '../host/host';
 
 export class NavComponent implements OnInit {
 
-  appTitle: Host[];
+  appTitle: Host;
 
   constructor(private hostService: HostService) { }
 

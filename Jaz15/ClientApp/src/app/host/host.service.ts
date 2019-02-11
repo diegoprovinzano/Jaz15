@@ -12,8 +12,8 @@ export class HostService {
   constructor(private appGlobal: AppGlobal,
               private http: HttpClient) { }
 
-  getHost(id: number): Observable<Host[]> {
-    return this.http.get<Host[]>(this.appGlobal.baseApiUrl + 'hosts/' + id);
+  getHost(id: number): Observable<Host> {
+    return this.http.get<Host>(this.appGlobal.baseApiUrl + 'hosts/' + id);
   }
 
   getHosts(): Observable<Host[]> {
