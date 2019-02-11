@@ -12,12 +12,12 @@ export class GuestService {
   constructor(private appGlobal: AppGlobal,
               private http: HttpClient) { }
 
-  getGuestUID(uid: string): Observable<Guest[]> {
-    return this.http.get<Guest[]>(this.appGlobal.baseApiUrl + 'guestsuid/' + uid);
+  getGuestUID(uid: string): Observable<Guest> {
+    return this.http.get<Guest>(this.appGlobal.baseApiUrl + 'guestsuid/' + uid);
   }
 
-  getGuest(id: number): Observable<Guest[]> {
-    return this.http.get<Guest[]>(this.appGlobal.baseApiUrl + 'guests/' + id);
+  getGuest(id: number): Observable<Guest> {
+    return this.http.get<Guest>(this.appGlobal.baseApiUrl + 'guests/' + id);
   }
 
   getGuests(): Observable<Guest[]> {

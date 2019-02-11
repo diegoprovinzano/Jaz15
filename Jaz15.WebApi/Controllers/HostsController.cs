@@ -21,12 +21,17 @@ namespace Jaz15.WebApi.Controllers
         private PartyEntities db = new PartyEntities();
 
         // GET: api/Hosts
-        public IQueryable<Host> GetHosts()
+        [HttpGet]
+        [Route("api/Hosts")]
+        [ResponseType(typeof(Host))]
+        public async Task<IHttpActionResult> GetHosts()
         {
-            return db.Hosts;
+            return Ok(await db.Hosts.ToListAsync());
         }
 
         // GET: api/Hosts/5
+        [HttpGet]
+        [Route("api/Hosts/{id}")]
         [ResponseType(typeof(Host))]
         public async Task<IHttpActionResult> GetHost(int id)
         {
@@ -40,6 +45,7 @@ namespace Jaz15.WebApi.Controllers
         }
 
         // PUT: api/Hosts/5
+        [HttpPut]
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutHost(int id, Host host)
         {
@@ -75,6 +81,7 @@ namespace Jaz15.WebApi.Controllers
         }
 
         // POST: api/Hosts
+        [HttpPost]
         [ResponseType(typeof(Host))]
         public async Task<IHttpActionResult> PostHost(Host host)
         {

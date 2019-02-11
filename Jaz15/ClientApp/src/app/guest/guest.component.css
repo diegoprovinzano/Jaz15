@@ -5,16 +5,19 @@
 
 .guestForm-container > * {
     width: 100%;
-    margin-left: 20px;
+    margin-left: 20px;    
+    margin-right: 20px;
 }
 
 .guestForm-container form {
     margin-bottom: 20px;
     margin-left: 20px;
+    margin-right: 20px;
 }
 
 .guestForm-container form > * {
     margin: 5px 0;
+    margin-right: 20px;
 }
 
 .guestForm-container .mat-radio-button {

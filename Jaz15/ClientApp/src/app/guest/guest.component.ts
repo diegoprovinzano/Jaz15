@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GuestService } from './guest.service';
 import { Guest } from './guest';
 import { QrService } from '../qr/qr.service';
@@ -25,7 +25,7 @@ export class GuestComponent implements OnInit {
     TableId: new FormControl('')
   });
 
-  guest: Guest[];
+  guest: Guest;
   uid: string;
   imageToShow: any;
   private sub: any;
@@ -33,7 +33,9 @@ export class GuestComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private guestService: GuestService,
               private qrService: QrService,
-              private sanitizer: DomSanitizer) { }
+              private sanitizer: DomSanitizer,
+              private ngzone: NgZone,
+              private ngroute: Router) { }
 
   ngOnInit() {
 
@@ -65,7 +67,13 @@ export class GuestComponent implements OnInit {
   }
 
   onSubmit() {
-    this.guestService.putGuest(this.guestForm.value).subscribe(result => this.guest);
+    this.guestService.putGuest(this.guestForm.value).subscribe(
+      result => {
+        this.guestService.getGuestUID(this.uid);
+        this.ngzone.run(() => {
+          this.ngroute.navigate(['/table/' + this.guest.TableId] );
+        });
+      });
   }
 
 }

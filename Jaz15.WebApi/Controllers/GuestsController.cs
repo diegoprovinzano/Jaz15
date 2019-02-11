@@ -25,13 +25,17 @@ namespace Jaz15.WebApi.Controllers
         private PartyEntities db = new PartyEntities();
 
         // GET: api/Guests
-        public IQueryable<Guest> GetGuests()
+        [HttpGet]
+        [Route("api/Guests")]
+        [ResponseType(typeof(Guest))]
+        public async Task<IHttpActionResult> GetGuests()
         {
-            return db.Guests;
+            return Ok(await db.Guests.ToListAsync());
         }
 
         // GET: api/Guests/5
         [HttpGet]
+        [Route("api/Guests/{id}")]
         [ResponseType(typeof(Guest))]
         public async Task<IHttpActionResult> GetGuest(int id)
         {
@@ -140,9 +144,9 @@ namespace Jaz15.WebApi.Controllers
             }
 
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode("http://localhost:4200/guest/" + uid, QRCodeGenerator.ECCLevel.Q);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode("https://jaz15.azurewebsites.net/guest/" + uid, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
-            Bitmap qrCodeImage = qrCode.GetGraphic(20, Color.Black, Color.White, (Bitmap)Bitmap.FromFile(@"C:\Users\diego\source\repos\Jaz15\Jaz15\ClientApp\src\assets\jaz15.png"));
+            Bitmap qrCodeImage = qrCode.GetGraphic(20, Color.Black, Color.White, (Bitmap)Bitmap.FromFile(@"D:\home\site\wwwroot\jaz15.png"));
 
             Bitmap bImage = qrCodeImage;
             System.IO.MemoryStream ms = new MemoryStream();
@@ -159,7 +163,7 @@ namespace Jaz15.WebApi.Controllers
         [Route("api/GuestsQR/create")]
         public async Task<IHttpActionResult> GetGuestQRCreate()
         {
-            Guest[] guest = db.Guests.ToArray();
+            Guest[] guest = await db.Guests.ToArrayAsync();
             if (guest == null)
             {
                 return null;
@@ -170,7 +174,7 @@ namespace Jaz15.WebApi.Controllers
                 QRCodeGenerator qrGenerator = new QRCodeGenerator();
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode("https://jaz15.azurewebsites.net/guest/" + g.UID, QRCodeGenerator.ECCLevel.Q);
                 QRCode qrCode = new QRCode(qrCodeData);
-                Bitmap qrCodeImage = qrCode.GetGraphic(20, Color.Black, Color.White, (Bitmap)Bitmap.FromFile(@"C:\Users\diego\source\repos\Jaz15\Jaz15\ClientApp\src\assets\jaz15.png"), 25, 1);
+                Bitmap qrCodeImage = qrCode.GetGraphic(20, Color.Black, Color.White, (Bitmap)Bitmap.FromFile(@"D:\home\site\wwwroot\jaz15.png"), 25, 1);
 
                 Bitmap bImage = qrCodeImage;
                 bImage.Save(@"C:\Users\diego\source\repos\Jaz15\Jaz15\ClientApp\src\assets\" + g.TableId.ToString() + "-" + g.FirstName + "-" + g.LastName + ".jpg", ImageFormat.Jpeg);

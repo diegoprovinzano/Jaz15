@@ -1,17 +1,21 @@
+<p *ngIf="isParam">
+Tus mesa es la numero {{ table?.Id }} y te sentas con:
+</p>
+
 <table border="1">
   <tr>
-    <td>{{table?.Id == 1 ? table?.Hosts[0]?.NickName: table?.Guests[0]?.NickName}}</td>
-    <td>{{table?.Guests[1]?.NickName}}</td>
-    <td>{{table?.Guests[2]?.NickName}}</td>
+    <td>{{table?.Guests[0]?.FirstName}}</td>
+    <td>{{table?.Guests[1]?.FirstName}}</td>
+    <td>{{table?.Guests[2]?.FirstName}}</td>
   </tr>
   <tr>
-    <td>{{table?.Guests[3]?.NickName}}</td>
-    <td>{{'Mesa ' + table?.Id}}</td>
-    <td>{{table?.Guests[4]?.NickName}}</td>
+    <td>{{table?.Guests[3]?.FirstName}}</td>
+    <td><strong>{{'Mesa ' + table?.Id}}</strong></td>
+    <td>{{table?.Guests[4]?.FirstName}}</td>
   </tr>
   <tr>
-    <td>{{table?.Guests[5]?.NickName}}</td>
-    <td>{{table?.Guests[6]?.NickName}}</td>
-    <td>{{table?.Guests[7]?.NickName}}</td>
+    <td>{{table?.Guests[5]?.FirstName}}</td>
+    <td>{{table?.Guests[6]?.FirstName}}</td>
+    <td>{{table?.Guests[7]?.FirstName}}</td>
   </tr>
 </table>

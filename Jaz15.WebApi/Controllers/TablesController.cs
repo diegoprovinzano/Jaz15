@@ -20,12 +20,17 @@ namespace Jaz15.WebApi.Controllers
         private PartyEntities db = new PartyEntities();
 
         // GET: api/Tables
-        public IQueryable<Table> GetTables()
+        [HttpGet]
+        [Route("api/Tables")]
+        [ResponseType(typeof(Table))]
+        public async Task<IHttpActionResult> GetTables()
         {
-            return db.Tables;
+            return Ok(await db.Tables.ToListAsync());
         }
 
-        // GET: api/Tables/5
+        // GET: api/Tables/5        
+        [HttpGet]
+        [Route("api/Tables/{id}")]
         [ResponseType(typeof(Table))]
         public async Task<IHttpActionResult> GetTable(int id)
         {
@@ -39,6 +44,7 @@ namespace Jaz15.WebApi.Controllers
         }
 
         // PUT: api/Tables/5
+        [HttpPut]
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutTable(int id, Table table)
         {
@@ -74,6 +80,7 @@ namespace Jaz15.WebApi.Controllers
         }
 
         // POST: api/Tables
+        [HttpPost]
         [ResponseType(typeof(Table))]
         public async Task<IHttpActionResult> PostTable(Table table)
         {
