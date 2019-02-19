@@ -1,21 +1,40 @@
-<p *ngIf="isParam">
-Tus mesa es la numero {{ table?.Id }} y te sentas con:
-</p>
-
-<table border="1">
-  <tr>
-    <td>{{table?.Guests[0]?.FirstName}}</td>
-    <td>{{table?.Guests[1]?.FirstName}}</td>
-    <td>{{table?.Guests[2]?.FirstName}}</td>
-  </tr>
-  <tr>
-    <td>{{table?.Guests[3]?.FirstName}}</td>
-    <td><strong>{{'Mesa ' + table?.Id}}</strong></td>
-    <td>{{table?.Guests[4]?.FirstName}}</td>
-  </tr>
-  <tr>
-    <td>{{table?.Guests[5]?.FirstName}}</td>
-    <td>{{table?.Guests[6]?.FirstName}}</td>
-    <td>{{table?.Guests[7]?.FirstName}}</td>
-  </tr>
-</table>
+<div class="tableForm-container">
+  <p *ngIf="isParam">
+  Tus mesa es la numero {{ table?.Id }} y te sentas con:
+  </p>
+  <div *ngIf="!isMobileResolution">
+    <table border="1">
+      <tr>
+        <td>{{table?.Guests[0]?.FirstName}}</td>
+        <td>{{table?.Guests[1]?.FirstName}}</td>
+        <td>{{table?.Guests[2]?.FirstName}}</td>
+      </tr>
+      <tr>
+        <td>{{table?.Guests[3]?.FirstName}}</td>
+        <td><strong>{{'Mesa ' + table?.Id}}</strong></td>
+        <td>{{table?.Guests[4]?.FirstName}}</td>
+      </tr>
+      <tr>
+        <td>{{table?.Guests[5]?.FirstName}}</td>
+        <td>{{table?.Guests[6]?.FirstName}}</td>
+        <td>{{table?.Guests[7]?.FirstName}}</td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="isMobileResolution"> 
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+              {{'Mesa ' + table?.Id}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>           
+          <li *ngFor="let guest of table.Guests">
+            <small>{{guest.FirstName}}</small>
+          </li>
+      </mat-expansion-panel>
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"> 
+      </mat-expansion-panel>    
+    </mat-accordion>
+  </div>
+</div>

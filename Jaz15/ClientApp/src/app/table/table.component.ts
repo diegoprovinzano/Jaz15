@@ -14,8 +14,10 @@ export class TableComponent implements OnInit {
   table: Table[];
   isParam: boolean;
   private sub: any;
+  private isMobileResolution: boolean;
+  panelOpenState = false;
 
-  @Input('tablename') tablename: number;
+  @Input() tablename: number;
 
   constructor(private route: ActivatedRoute,
               private tableService: TableService) { }
@@ -33,5 +35,16 @@ export class TableComponent implements OnInit {
       data => {
       this.table = data;
      });
+
+     this.getIsMobileResolution();
+  }
+
+  public getIsMobileResolution(): boolean {
+    if (window.innerWidth < 768) {
+      this.isMobileResolution = true;
+    } else {
+      this.isMobileResolution = false;
+    }
+    return this.isMobileResolution;
   }
 }

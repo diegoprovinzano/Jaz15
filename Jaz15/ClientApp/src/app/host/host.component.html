@@ -1,14 +1,24 @@
 
-<table border="1" class="hostTable">
-  <tr>
-    <td align="center" colspan="4">
-      <strong>{{hosts[0]?.FirstName}}</strong>
-    </td>
-  </tr>
-  <tr>
-    <td>{{hosts[3]?.FirstName}}</td>
-    <td>{{hosts[1]?.FirstName}}</td>    
-    <td>{{hosts[2]?.FirstName}}</td>
-    <td>{{hosts[4]?.FirstName}}</td>
-  </tr>
-</table>
+
+
+<mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            
+        </mat-panel-title>
+        <mat-panel-description>
+          Mesa Principal
+        </mat-panel-description>
+      </mat-expansion-panel-header>           
+      <mat-chip color="accent"><strong>{{hosts[0]?.FirstName}}</strong></mat-chip>
+      <mat-chip-list>
+        <mat-chip color="primary"><small>{{hosts[3]?.FirstName}}</small></mat-chip>
+        <mat-chip color="primary"><small>{{hosts[1]?.FirstName}}</small></mat-chip>
+        <mat-chip color="primary"><small>{{hosts[2]?.FirstName}}</small></mat-chip>
+        <mat-chip color="primary"><small>{{hosts[4]?.FirstName}}</small></mat-chip>
+      </mat-chip-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"> 
+    </mat-expansion-panel>    
+  </mat-accordion>

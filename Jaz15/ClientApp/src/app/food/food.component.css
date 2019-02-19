@@ -1,0 +1,26 @@
+.foodForm-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.foodForm-container > * {
+    margin-left: 20px;   
+}
+
+.foodForm-container form {
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.foodForm-container form > * {
+    margin: 5px 0;
+    margin-right: 20px;
+}
+
+.foodForm-container .mat-radio-button {
+    margin: 0 5px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    padding-right: 16px;
+}
