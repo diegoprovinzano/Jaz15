@@ -1,24 +1,30 @@
-.about-container {
+.aboutForm-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
-.about-container > * {
-    width: 100%;
+.aboutForm-container > * {
+    margin-left: 20px;   
 }
 
-.about-container form {
+.aboutForm-container form {
     margin-bottom: 20px;
+    margin-left: 20px;
 }
 
-.about-container form > * {
+.aboutForm-container form > * {
     margin: 5px 0;
+    margin-right: 20px;
 }
 
-.about-container .mat-radio-button {
+.aboutForm-container .mat-radio-button {
     margin: 0 5px;
 }
 
 .mat-radio-button ~ .mat-radio-button {
     padding-right: 16px;
+}
+.instaimg {
+    margin-bottom: 20px;
+    margin-left: 20px;
 }

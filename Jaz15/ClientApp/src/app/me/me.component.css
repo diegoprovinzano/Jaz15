@@ -1,23 +1,23 @@
-.giftForm-container {
+.meForm-container {
     display: flex;
     flex-direction: column;
 }
 
-.giftForm-container > * {
+.meForm-container > * {
     margin-left: 20px;   
 }
 
-.giftForm-container form {
+.meForm-container form {
     margin-bottom: 20px;
     margin-left: 20px;
 }
 
-.giftForm-container form > * {
+.meForm-container form > * {
     margin: 5px 0;
     margin-right: 20px;
 }
 
-.giftForm-container .mat-radio-button {
+.meForm-container .mat-radio-button {
     margin: 0 5px;
 }
 

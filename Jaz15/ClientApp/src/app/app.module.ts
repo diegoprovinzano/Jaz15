@@ -22,6 +22,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { QrComponent } from './qr/qr.component';
 import { FoodComponent } from './food/food.component';
 import { GiftComponent } from './gift/gift.component';
+import { MeComponent } from './me/me.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { GiftComponent } from './gift/gift.component';
     HostComponent,
     QrComponent,
     FoodComponent,
-    GiftComponent
+    GiftComponent,
+    MeComponent
   ],
   imports: [
     BrowserModule,
